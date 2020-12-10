@@ -10,7 +10,6 @@ import CoreData
 
 extension GroceryList
 {
-    @NSManaged var ProductList: [Product]
     
     func addProduct(named name: String){
         ProductList.append(Product(product: name,created: nil,for: nil))

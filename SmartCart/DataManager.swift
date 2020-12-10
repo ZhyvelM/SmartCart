@@ -90,18 +90,18 @@ open class DataManager: NSObject{
     }
     
     func restoreGroceryList() -> [Product] {
-        let managedContext = persistentContainer.viewContext
-        let prds: [Product] = []
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "GroceryList")
-        do {
-            let GrocList = try managedContext.fetch(fetchRequest)
-            if GrocList.count > 0
-            {
-                //return GrocList[0].products as? [Product] ?? prds
+            let managedContext = persistentContainer.viewContext
+            let prds: [Product] = []
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "GroceryList")
+            do {
+                let result = try managedContext.fetch(fetchRequest)
+                if let groceryList = result.first as? GroceryList,
+                   let products = groceryList.products {
+                    return products
+                }
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
             }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            return prds
         }
-        return prds
-    }
 }

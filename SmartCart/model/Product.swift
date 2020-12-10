@@ -27,13 +27,13 @@ public class Product : NSObject, NSCoding
         Name = coder.decodeObject(forKey: "name") as! String
         CreateDate = coder.decodeObject(forKey: "createDate") as! Date?
         TermOfKeep = coder.decodeObject(forKey: "termOfKeep") as! Int?
-        quantity = coder.decodeObject(forKey: "quantity") as! Int? ?? 1
+        quantity = coder.decodeInteger(forKey:  "quantity") 
     }
     
     var Name: String = ""
     var CreateDate: Date?
     var TermOfKeep: Int?
-    var quantity: Int = 1
+    var quantity: Int
     var daysToExpire: Int {
         let calendar = NSCalendar.current
         let currentDate = calendar.startOfDay(for: Date())
